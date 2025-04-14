@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Kylie Sun ASG1</title>
+
+    <style>
+      .active-shape {
+        background-color: rgb(231, 115, 165);
+        color: white;
+        font-weight: bold;
+        border: 1px solid black;
+      }
+
+      button {
+      margin: 2px;
+      padding: 6px 10px;
+      font-weight: bold;
+    }
+
+    #canvas-container {
+        display: flex;
+        gap: 20px;
+        align-items: flex-start;
+        margin-bottom: 20px;
+      }
+
+      canvas, img {
+        border: 1px solid black;
+      }
+
+    </style>
+
+  </head>
+
+  <body onload="main()">
+
+    <div id="canvas-container">
+      <canvas id="webgl" width="400" height="400">
+        Please use a browser that supports "canvas"
+      </canvas>
+      <img src="reference_drawing.jpg" alt="Reference Drawing" width="400" height="400">
+    </div>
+
+    <p id="numdot"> XXX </p>
+
+    <button type="button" id="drawPictureButton">Click to Draw Reference Picture!</button>
+
+    <p>
+    <button type="button" id="clearButton">Clear Canvas</button>
+    <button type="button" id="fillCanvasButton">Set Background</button>
+
+
+
+    <p>Choose your brush type:  
+    <button type="button" id="pointButton">Point</button>
+    <button type="button" id="triButton">Triangle</button>
+    <button type="button" id="circleButton">Circle</button>
+
+    <p>
+    Red <input type="range" min="0" max="100" value="100" class="slider" id="redSlide">
+    <p>
+    Green <input type="range" min="0" max="100" value="0" class="slider" id="greenSlide">
+    <p>
+    Blue <input type="range" min="0" max="100" value="0" class="slider" id="blueSlide">
+
+    <p>
+    Brush Size: <input type="range" min="5" max="40" value="0" class="slider" id="sizeSlide">
+    <p>
+
+    <p>
+    (Circles) Segment Count: <input type="range" min="3" max="100" value="10" class="slider" id="segmentSlide">
+    </p>
+        
+    <p>Notes to Grader: Used AI for the following:
+    <p>     - function to convert pixels to 
+    
+
+    <script src="./lib/webgl-utils.js"></script>
+    <script src="./lib/webgl-debug.js"></script>
+    <script src="./lib/cuon-utils.js"></script>
+    <script src="Triangle.js"></script>
+    <script src="Circle.js"></script>
+    <script src="Point.js"></script>
+    <script src="asg1.js"></script>
+  </body>
+</html>
