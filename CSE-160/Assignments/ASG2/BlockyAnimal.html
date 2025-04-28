@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Kylie Sun ASG2</title>
+  <h1 style="text-align: left; color: rgb(0, 0, 0); font-family: sans-serif;">Alfredo the Cat</h1>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 20px;
+    }
+    fieldset {
+      margin-top: 1em;
+      padding: 1em;
+      border: 1px solid #ccc;
+    }
+    label {
+      display: inline-block;
+      width: 150px;
+      margin-bottom: 0.3em;
+    }
+    input[type="range"] {
+      width: 200px;
+    }
+
+      .active-shape {
+        background-color: rgb(231, 115, 165);
+        color: white;
+        font-weight: bold;
+        border: 1px solid black;
+      }
+
+      button {
+        background-color: rgb(255, 186, 238);
+        color: rgb(79, 20, 61);
+        border: 1px;
+        padding: 8px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+
+      button:hover {
+        background-color: rgb(230, 120, 200);
+      }
+
+    #canvas-container {
+        display: flex;
+        gap: 20px;
+        align-items: flex-start;
+        margin-bottom: 20px;
+      }
+
+      canvas, img {
+        border: 1px solid black;
+      }
+
+  </style>
+</head>
+
+<body onload="main()">
+  <canvas id="webgl" width="400" height="400">
+    Please use a browser that supports "canvas"
+  </canvas>
+
+  <div id="popupText" style="
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 18px;
+    color: rgb(248, 141, 221);
+    font-weight: bold;
+    font-family: sans-serif;
+    display: none;">
+    no.
+  </div>
+
+  <p id="numdot">XXX</p>
+
+  <p><strong>Shift Clicking Notes:</strong></p>
+  <ul>
+    <li>Click "Reset Cat" before Shift Poking</li>
+    <li>Shift Poke 3 options: yes, maybe, no (change pov for better view)</li>
+  </ul>
+<p></p>
+
+  <fieldset>
+    <legend>Camera & Reset</legend>
+    <label for="angleSlide">Global Axis Rotation:</label>
+    <input type="range" min="-180" max="180" value="0" id="angleSlide"><br>
+    <button id="resetCat">Reset Cat</button>
+    <button id="resetCameraBtn">Reset Camera</button>
+  </fieldset>
+
+  <fieldset>
+    <legend>Walk Animation</legend>
+    <button id="toggleLegWalk">Toggle Walk Animation</button><br><br>
+    <p>(Must make sure Lower Body Control is Disabled)</p>
+    <p>(Also make sure Walk Animation is Disabled)</p>
+    <label for="backLeftLegSlide">Back Left Leg</label>
+    <input type="range" id="backLeftLegSlide" min="-45" max="45" value="0"><br>
+
+    <label for="backRightLegSlide">Back Right Leg</label>
+    <input type="range" id="backRightLegSlide" min="-45" max="45" value="0"><br>
+
+    <label for="frontLeftLegSlide">Front Left Leg</label>
+    <input type="range" id="frontLeftLegSlide" min="-15" max="25" value="0"><br>
+
+    <label for="frontRightLegSlide">Front Right Leg</label>
+    <input type="range" id="frontRightLegSlide" min="-15" max="25" value="0">
+  </fieldset>
+
+  <fieldset>
+    <legend>Sit Down</legend>
+    <button id="toggleLowerBodySlider">Enable Lower Body Control</button><br><br>
+    <label for="lowerbodySlide">Lower Body</label>
+    <input type="range" min="0" max="90" value="5" id="lowerbodySlide" disabled>
+  </fieldset>
+  
+
+  <fieldset>
+    <legend>Tail</legend>
+    <p>(Must stop tail animation to modify tail sliders)</p>
+    <button id="toggleTailAnimation">Toggle Tail Animation</button><br><br>
+    <label for="tail1Slide">Tail Angle 1</label>
+    <input type="range" id="tail1Slide" min="0" max="180" value="0"><br>
+
+    <label for="tail2Slide">Tail Angle 2</label>
+    <input type="range" id="tail2Slide" min="-90" max="0" value="0"><br>
+
+    <label for="tail3Slide">Tail Angle 3</label>
+    <input type="range" id="tail3Slide" min="-90" max="0" value="0">
+  </fieldset>
+
+  <fieldset>
+    <legend>Head</legend>
+    <p>(Must stop head animation first to modify head sliders)</p>
+    <label for="headnodYESSlide">Shake Head "Yes"</label>
+    <input type="range" min="-45" max="45" value="5" id="headnodYESSlide"><br>
+
+    <label for="headnodNOSlide">Shake Head "No"</label>
+    <input type="range" min="-45" max="45" value="5" id="headnodNOSlide"><br>
+
+    <label for="headnodCURIOUSSlide">Shake Head "Maybe?"</label>
+    <input type="range" min="-15" max="15" value="5" id="headnodCURIOUSSlide"><br><br>
+
+    <button id="toggleIdleHeadNod">Toggle Idle Head Nod</button>
+  </fieldset>
+
+  
+  <p><strong>Additional Notes:</strong></p>
+    Used AI for the following:
+    <ul>
+      <li>Adding style to the page</li>
+      <li>Tail animation</li>
+      <li>Reseting slider positions</li>
+      <li>Lower Body (Sitting) Toggle</li>
+      <li>Shift poke animation line up for rotating between the 3 moods</li>
+      <li>Cylinder and Halfcone .js functions</li>
+      <li>Animations</li>
+      <li>Debugging</li>
+
+    </ul>
+    
+<p></p>
+
+
+
+  <!-- javascript -->
+  <script src="./lib/webgl-utils.js"></script>
+  <script src="./lib/webgl-debug.js"></script>
+  <script src="./lib/cuon-utils.js"></script>
+  <script src="./lib/cuon-matrix.js"></script>
+
+  <!-- assignment -->
+  <script src="Triangle.js"></script>
+  <script src="Circle.js"></script>
+  <script src="Point.js"></script>
+  <script src="Cube.js"></script>
+  <script src="HalfCone.js"></script>
+  <script src="Eye.js"></script>
+  <script src="Cylinder.js"></script>
+  <script src="Leg.js"></script>
+  <script src="BlockyAnimal.js"></script>
+</body>
+</html>
