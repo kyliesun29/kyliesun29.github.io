@@ -1,7 +1,7 @@
 // ColoredPoint.js (c) 2012 matsuda
 // Vertex shader program
 
-// 
+// https://kyliesun29.github.io/CSE-160/Assignments/ASG3/World.html
 
 var VSHADER_SOURCE = `
   precision mediump float;
@@ -213,16 +213,19 @@ function keydown(ev){
     //console.log(ev.keyCode);
 }
 
-let g_map = [
-  [4, 0, 0, 2, 0, 0, 3, 1],
-  [0, 1, 0, 0, 0, 2, 0, 0],
-  [0, 0, 3, 0, 1, 0, 0, 0],
-  [0, 0, 0, 4, 0, 0, 0, 2],
-  [1, 0, 0, 0, 3, 0, 0, 0],
-  [0, 2, 0, 0, 0, 1, 0, 0],
-  [3, 0, 0, 0, 0, 0, 2, 0],
-  [0, 0, 1, 0, 0, 4, 0, 0],
-];
+// let g_map = [
+//   [4, 0, 0, 2, 0, 0, 3, 1],
+//   [0, 1, 0, 0, 0, 2, 0, 0],
+//   [0, 0, 3, 0, 1, 0, 0, 0],
+//   [0, 0, 0, 4, 0, 0, 0, 2],
+//   [1, 0, 0, 0, 3, 0, 0, 0],
+//   [0, 2, 0, 0, 0, 1, 0, 0],
+//   [3, 0, 0, 0, 0, 0, 2, 0],
+//   [0, 0, 1, 0, 0, 4, 0, 0],
+// ];
+
+let g_map = new Array(32).fill().map(() => new Array(32).fill(0));
+
 
 function drawMap() {
   for (let x = 0; x < 8; x++) {
